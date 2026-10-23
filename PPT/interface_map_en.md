@@ -84,10 +84,10 @@ USART2 and USART6 are paralleled across several physical connectors — connect 
 
 | # | Silkscreen | Ref | Pins | USART | PX4 | APM | BF/INAV | Notes |
 |---|---|---|---|---|---|---|---|---|
-| 1 | ESC telemetry / power (10-pin) | U16 / U19 | VCC, GND, CUR, RX7, PWM1-8 | UART7 RX | **URT6** | SERIAL6 | UART7 | RX7 only; TX7 not broken out |
+| 1 | 4-in-1 ESC S1-S4 (8-pin) | U16 | VCC, GND, CUR, RX7, PWM1-4 | UART7 RX | **URT6** | SERIAL6 | UART7 | Current sense; RX7 = ESC telemetry |
 | 2 | TELEM3 (4-pin) | U12 | 4V3, GND, RX8, TX8 | UART8 | **TELEM3** | SERIAL7 | UART8 | |
 | 3 | USB | — | DP, DM, 5V, GND | — | OTG1 | SERIAL0 | — | |
-| 4 | Power / current | U16 / U19 | CUR, S1-S8, VCC, GND | — | — | — | — | Shared with ESC/PWM |
+| 4 | 4-in-1 ESC S5-S8 (8-pin) | U19 | VCC, GND, NC, RX7, PWM5-8 | UART7 RX | **URT6** | SERIAL6 | UART7 | RX7 = ESC telemetry |
 
 The MINI has **no CAN** connector and only RX7 of UART7 (ESC telemetry input).
 
@@ -101,7 +101,7 @@ The MINI has **no CAN** connector and only RX7 of UART7 (ESC telemetry input).
 | PX4 TELEM2 | Front TELEM2 | Top U11 |
 | PX4 TELEM3 | Front TELEM3 | Bottom U12 |
 | PX4 RC / receiver | Front TELEM/RC or SBUS | Top U14 or U17 |
-| PX4 URT6 / ESC telemetry | Front RX7/TX7 | Bottom ESC connector RX7 |
+| PX4 URT6 / ESC telemetry | Front RX7/TX7 | Bottom ESC connectors RX7 (S1-S4 / S5-S8) |
 | External compass | Front I2C1 (CN4) | Top U8 |
 | CAN | Front CN2 | — |
 
