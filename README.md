@@ -60,6 +60,7 @@ flashed from QGC.
 | [`firmware固件/built已编译固件/`](firmware固件/built已编译固件/) | Prebuilt PX4 / ArduPilot / Betaflight / INAV firmware |
 | [`firmware固件/src编译源代码资料/`](firmware固件/src编译源代码资料/) | PX4 board sources, ArduPilot hwdef, Betaflight/INAV configs, build notes |
 | [`param参数/`](param参数/) | SD-card parameter package for the INA238 (DPM238) power monitor |
+| [`PPT/`](PPT/) | Interface mapping documents and annotated board images |
 | `LICENSE`, `LICENSE-HARDWARE`, `NOTICE.md` | Licenses and third-party notices |
 
 ## Documentation
@@ -73,6 +74,7 @@ flashed from QGC.
 | Betaflight build notes | [`how_to_build_en.txt`](firmware固件/src编译源代码资料/Betafight/how_to_build_en.txt) | [`编译方法.txt`](firmware固件/src编译源代码资料/Betafight/编译方法.txt) |
 | INAV build notes | [`how_to_build_en.txt`](firmware固件/src编译源代码资料/INAV/how_to_build_en.txt) | [`编译方法.txt`](firmware固件/src编译源代码资料/INAV/编译方法.txt) |
 | INA238 / DPM238 setup | [`INSTRUCTIONS_EN.txt`](param参数/OpenblH743_DPM238_SD_px4/INSTRUCTIONS_EN.txt) | [`使用说明.txt`](param参数/OpenblH743_DPM238_SD_px4/使用说明.txt) |
+| Interface map (VIT6 / MINI) | [`interface_map_en.md`](PPT/interface_map_en.md) | [`接口说明.md`](PPT/接口说明.md) |
 
 ## Building from source
 

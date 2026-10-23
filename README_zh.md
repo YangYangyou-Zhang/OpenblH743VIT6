@@ -56,6 +56,7 @@ PX4 的合并 hex 已包含 bootloader，用 ST-Link 烧录；`.px4` 可用 QGC 
 | [`firmware固件/built已编译固件/`](firmware固件/built已编译固件/) | PX4 / ArduPilot / Betaflight / INAV 预编译固件 |
 | [`firmware固件/src编译源代码资料/`](firmware固件/src编译源代码资料/) | PX4 板级源码、ArduPilot hwdef、Betaflight/INAV 配置、编译说明 |
 | [`param参数/`](param参数/) | INA238（DPM238）电流计的 SD 卡参数包 |
+| [`PPT/`](PPT/) | 接口映射文档与四张标注图 |
 | `LICENSE`、`LICENSE-HARDWARE`、`NOTICE.md` | 许可与第三方声明 |
 
 ## 文档
@@ -69,6 +70,7 @@ PX4 的合并 hex 已包含 bootloader，用 ST-Link 烧录；`.px4` 可用 QGC 
 | Betaflight 编译说明 | [`how_to_build_en.txt`](firmware固件/src编译源代码资料/Betafight/how_to_build_en.txt) | [`编译方法.txt`](firmware固件/src编译源代码资料/Betafight/编译方法.txt) |
 | INAV 编译说明 | [`how_to_build_en.txt`](firmware固件/src编译源代码资料/INAV/how_to_build_en.txt) | [`编译方法.txt`](firmware固件/src编译源代码资料/INAV/编译方法.txt) |
 | INA238 / DPM238 配置 | [`INSTRUCTIONS_EN.txt`](param参数/OpenblH743_DPM238_SD_px4/INSTRUCTIONS_EN.txt) | [`使用说明.txt`](param参数/OpenblH743_DPM238_SD_px4/使用说明.txt) |
+| 接口映射（VIT6 / MINI） | [`interface_map_en.md`](PPT/interface_map_en.md) | [`接口说明.md`](PPT/接口说明.md) |
 
 ## 从源码编译
 
