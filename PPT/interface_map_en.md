@@ -58,7 +58,7 @@ BF/INAV: UART number equals the STM32 USART number; the INAV target defaults `SE
 | # | Silkscreen | Ref | Pins | USART | PX4 | APM | BF/INAV | Notes |
 |---|---|---|---|---|---|---|---|---|
 | 1 | (none, 6-pin) | U10 | 4V3, GND, RX1, TX1, SDA2, SCL2 | USART1 | **GPS1** | SERIAL1 | UART1 | Compass I2C2 |
-| 2 | Receiver + telemetry (6-pin) | U15 | RX6, GND, RX2, TX2, GND, VCC | USART6 RX + USART2 | **RC + TELEM1** | SERIAL5 + SERIAL2 | UART6 + UART2 | |
+| 2 | DJI HD VTX (6-pin) | U15 | RX6, GND, RX2, TX2, GND, VCC | USART6 RX + USART2 | **RC + TELEM1** | SERIAL5 + SERIAL2 | UART6 + UART2 | For DJI O3 Air Unit etc.; VCC power |
 | 3 | RC / telemetry (4-pin) | U12 | 4V3, GND, RX6, TX6 | USART6 | **RC** | SERIAL5 | UART6 | |
 | 4 | Analog camera | U16 | VID_IN, GND, 5V | — | — | — | — | |
 | 5 | USB | — | DP, DM, 5V, GND | — | OTG1 | SERIAL0 | — | |
@@ -76,7 +76,7 @@ USART2 and USART6 are paralleled across several physical connectors — connect 
 | 3 | TELEM1 / VTX (5-pin) | — | TX2, RX2, VID_OUT, GND, VCC | USART2 | **TELEM1** | SERIAL2 | UART2 |
 | 4 | TELEM2 (4-pin) | U11 | 4V3, GND, RX4, TX4 | UART4 | **TELEM2** | SERIAL4 | UART4 |
 | 5 | RC (4-pin) | U14 | 4V3, GND, RX6, TX6 | USART6 | **RC** | SERIAL5 | UART6 |
-| 6 | Receiver + telemetry (6-pin) | U17 | RX6, GND, RX2, TX2, GND, VCC | USART6 RX + USART2 | **RC + TELEM1** | SERIAL5 + SERIAL2 | UART6 + UART2 |
+| 6 | DJI HD VTX (6-pin) | U17 | RX6, GND, RX2, TX2, GND, VCC | USART6 RX + USART2 | **RC + TELEM1** | SERIAL5 + SERIAL2 | UART6 + UART2 | For DJI O3 Air Unit etc.; VCC power |
 | 7 | I2C1 (4-pin) | U8 | 4V3, GND, SDA1, SCL1 | — | I2C1 | — | — |
 | 8 | Camera (3-pin) | — | CAM/VID_IN, GND, 4V3 | — | — | — | — |
 
@@ -101,6 +101,7 @@ The MINI has **no CAN** connector and only RX7 of UART7 (ESC telemetry input).
 | PX4 TELEM2 | Front TELEM2 | Top U11 |
 | PX4 TELEM3 | Front TELEM3 | Bottom U12 |
 | PX4 RC / receiver | Front TELEM/RC or SBUS | Top U14 or U17 |
+| DJI HD VTX | Rear U15 (USART6 RX + USART2 + VCC) | Top U17 (USART6 RX + USART2 + VCC) |
 | PX4 URT6 / ESC telemetry | Front RX7/TX7 | Bottom ESC connectors RX7 (S1-S4 / S5-S8) |
 | External compass | Front I2C1 (CN4) | Top U8 |
 | CAN | Front CN2 | — |
