@@ -1,0 +1,116 @@
+=======================================================================
+硬件设计文件许可 / HARDWARE LICENSE
+=======================================================================
+
+Copyright (c) 2026 洋洋柚
+Gitee:  https://gitee.com/zhangyangyangyou
+GitHub: https://github.com/YangYangyou-Zhang
+All rights reserved except as expressly granted below.
+
+本许可适用于本仓库中的硬件设计成果，包括但不限于：
+
+  - Circuit_diagram电路图/   原理图 (Schematic)、PCB (Layout/Gerber)、BOM
+  - STL图纸/                 结构件 3D 模型、机械图纸
+  - 其他标注了本许可的硬件设计文件
+
+This license applies to the hardware design files of this project,
+including schematics, PCB layout, Gerber files, BOM, 3D/mechanical
+models and enclosures.
+
+本文件**不适用于**本仓库内的任何第三方源代码或固件（如 PX4、ArduPilot、
+Betaflight、INAV 等）。该等内容的版权归其各自作者，遵循其原始许可，
+与本文件无关，详见 NOTICE.md。
+This license does **not** apply to any third-party source code or firmware
+in this repository (such as PX4, ArduPilot, Betaflight, INAV). Those remain
+the property of their respective authors under their original licenses and
+are unrelated to this file. See NOTICE.md for details.
+
+-----------------------------------------------------------------------
+许可条款 / License Terms
+-----------------------------------------------------------------------
+
+上述硬件设计文件采用 Creative Commons
+Attribution-NonCommercial-ShareAlike 4.0 International
+License (CC BY-NC-SA 4.0) 许可。
+
+本作品为原创硬件设计，受完整著作权保护。任何未经授权的商业使用、
+复制、生产、制造与销售均被禁止。
+
+The hardware design files are licensed under the Creative Commons
+Attribution-NonCommercial-ShareAlike 4.0 International License.
+Unauthorized commercial use, reproduction, manufacturing or sale is
+prohibited.
+
+你可以 / You are free to:
+
+  - 复制与再分发 (Share) —— 以任何媒介或格式复制、分发本设计；
+  - 改编 (Adapt) —— 重混、转换、并基于本设计进行创作。
+
+但须遵守以下条件 / Under the following terms:
+
+  - 署名 (Attribution) —— 必须注明作者「洋洋柚」，附上其 Gitee
+    (https://gitee.com/zhangyangyangyou) 或 GitHub
+    (https://github.com/YangYangyou-Zhang) 主页链接与本许可链接，
+    并说明是否作出修改。
+    You must credit the author "洋洋柚" and provide a link to the
+    author's profile, a link to the license, and indicate if changes
+    were made.
+
+  - 非商业性使用 (NonCommercial) —— 不得将本设计用于商业目的。
+    商业目的包括但不限于：量产销售、商业产品集成、以本设计提供
+    有偿服务、为营利目的制造/销售/许诺销售本硬件。
+    You may not use the material for commercial purposes.
+
+  - 相同方式共享 (ShareAlike) —— 若你基于本设计进行修改或再创作，
+    必须以相同的 CC BY-NC-SA 4.0 许可分发你的贡献。
+    If you remix, transform, or build upon the material, you must
+    distribute your contributions under the same license.
+
+  - 不得增加额外限制 (No additional restrictions) —— 不得对本设计
+    施加法律条款或技术措施，以限制他人行使本许可所允许的权利。
+    You may not apply legal terms or technological measures that
+    legally restrict others from doing anything the license permits.
+
+-----------------------------------------------------------------------
+商用授权 / Commercial Licensing
+-----------------------------------------------------------------------
+
+如需将本硬件设计用于任何商业用途，必须事先取得作者书面授权。
+联系作者以洽谈商业授权条款（联系方式见本仓库 NOTICE.md）。
+
+For any commercial use, prior written permission from the author is
+required. Please contact the author to discuss commercial licensing.
+
+-----------------------------------------------------------------------
+免责声明 / Disclaimer
+-----------------------------------------------------------------------
+
+本硬件设计按「现状」(AS-IS) 提供，不附带任何明示或默示的保证，
+包括但不限于对适销性、特定用途适用性及不侵权的保证。作者不对
+因使用本设计而导致的任何直接或间接损失、损害承担责任。
+
+本设计为飞控硬件，涉及电子与飞行安全，使用者须自行承担全部风险，
+并独立完成验证与测试。
+
+THE HARDWARE DESIGN IS PROVIDED "AS-IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY ARISING FROM THE USE OF THIS DESIGN.
+
+-----------------------------------------------------------------------
+完整法律文本 / Full Legal Text
+-----------------------------------------------------------------------
+
+CC BY-NC-SA 4.0 完整法律文本见本仓库根目录的 LICENSE 文件，
+亦可访问：
+https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+或致信 Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+
+The full legal code of CC BY-NC-SA 4.0 is in the LICENSE file at the
+root of this repository, and is also available at
+https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+
+注：本文件中的中文说明仅为方便理解，若与 CC BY-NC-SA 4.0 法律文本
+冲突，以法律文本为准。
+=======================================================================

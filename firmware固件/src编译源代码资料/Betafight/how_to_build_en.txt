@@ -1,0 +1,36 @@
+# Copyright (c) 2026 洋洋柚 (@zhangyangyangyou)
+# OpenblH743VIT6 — custom STM32H743VIT6 flight controller board.
+# Update the package list and upgrade the system
+sudo apt update && sudo apt upgrade
+
+# Install base build tools
+# You need git (for cloning), make (for building), clang (needed for some tests) and python, etc.
+sudo apt -y install build-essential git curl clang-18 python3 python-is-python3
+
+# Clone the Betaflight source code
+git clone https://github.com/betaflight/betaflight.git
+
+# Enter the source directory
+cd betaflight
+
+# Check out a stable version (e.g. 4.5.3)
+git checkout 4.5.3
+
+# This command automatically downloads and installs the required toolchain
+make arm_sdk_install
+
+# On first build or after switching branches, run this to generate default configs for all targets.
+make configs
+
+# Place the OpenblH743VIT6 folder under ~/betaflight/src/config/configs, then build the OpenblH743VIT6 firmware
+make config OpenblH743VIT6
+
+# Find the built firmware betaflight_4.5.3_STM32H743_OpenblH743VIT6.hex under ~/betaflight/obj
+
+# (Legacy F405 reference board: make config OpenblF405RGT6)
+
+# ===== Key notes (see OpenblH743VIT6/README.md for details) =====
+# - HSE crystal 8MHz: SYSTEM_HSE_MHZ 8 in config.h
+# - IMU orientation: CW90_DEG_FLIP
+# - SD card / barometer SPL06 / magnetometer QMC5883P: not yet supported; USE_SDCARD / USE_BARO / USE_MAG are commented out in config.h. Uncomment them once supported in a future release.
+# - After flashing, run defaults + save in the CLI to restore factory settings (otherwise the IMU orientation reads the old config value)

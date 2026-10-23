@@ -1,0 +1,72 @@
+OpenblH743VIT6 + DPM238 (INA238 digital power meter) — SD-card configuration (English)
+====================================================================================
+
+Bottom line: the current openbl_h743_default firmware ALREADY has the INA238 driver built in
+(default.px4board lines 28-32 already enable CONFIG_DRIVERS_POWER_MONITOR_INA220/226/228/238 +
+VOXLPM, and the driver is linked into the .bin). So hooking up a DPM238 requires NO recompile,
+NO feature cuts, and NO extra flash. You only need the SD-card config below.
+
+Folder layout (copy the whole "etc" folder to the SD-card root):
+    etc/config.txt    (optional — see section [3])
+    etc/extras.txt    (the script that actually starts INA238)
+
+
+[1] Wiring
+    Connect the DPM238 I2C to the flight controller's I2C pins. Both I2C buses on this board work:
+        bus1 = I2C1 (PB6/PB7)      —— on-board baro/compass are on this bus
+        bus2 = I2C2 (PB10/PB11)
+    This package is set to bus1 (-b 1), matching the measured wiring: i2cdetect -b 1 shows 0x40
+    (the DPM238). If unsure which bus it is wired to: after boot, QGC → Analyze Tools → MAVLink
+    Console (prompt pxh>) and run:
+        i2cdetect -b 1
+        i2cdetect -b 2
+    Whichever scan shows a device at 0x40, change -b in etc/extras.txt to that bus number.
+
+[2] Copy to card and power on
+    Copy the whole etc folder to the SD-card root (card should have /etc/extras.txt and
+    /etc/config.txt), insert the card and power on. At the end of boot the controller runs
+    extras.txt automatically:
+        ina238 start -X -b 1 -a 0x40 -k
+    (-k: if the battery isn't connected at boot / the part is slow to come up, the driver retries
+    periodically until the DPM238 is ready; drop -k if you don't need that. NOTE: in this firmware
+    -f is the I2C bus-frequency option (requires a kHz value), NOT a retry switch — don't use it.)
+
+[3] What config.txt does
+    Before extras, rcS also reads etc/config.txt. The two params there (SENS_EN_INA226=0 /
+    INA238=1) have NO startup logic reading them in this board's firmware (purely dormant params),
+    so including or omitting the file makes no difference to the DPM238. It is kept only for
+    consistency with the official config package; you may delete it.
+
+[4] QGC checks
+    - The HUD / power bar should show the DPM238 voltage and current; current no longer comes
+      from the analog channel (PC0/PC1).
+    - Confirm the driver is running from the MAVLink Console:
+          ina238 status
+          listener battery_status     # check voltage_v / current_a / connected = true
+    - If the log reports "Failed to init INA238 on bus N" → usually wrong bus number or wiring;
+      go back to section [1] and re-test.
+
+[5] Power parameters (QGC → Parameters → search)
+    The digital power meter reports on BAT1 by default, the same channel group as the current
+    analog battery, so the existing values carry over unchanged:
+        BAT1_N_CELLS / BAT1_CAPACITY / BAT1_V_CHARGED / BAT1_V_EMPTY
+    Just confirm the driver defaults (they match the DPM238):
+        INA238_CURRENT = 327.68
+        INA238_SHUNT   = 0.0005
+
+[6] Relationship with the analog ADC power meter (board_adc) — important
+    rc.board_sensors starts board_adc (the analog ADC battery source) on every boot.
+    The INA238 is also a "Power Module" source and shares the BAT1 channel by default.
+    If both are publishing at once, the QGC battery reading can overwrite itself / misbehave
+    (jumps or drops to zero). To handle this:
+      a) Temporary:  run "board_adc stop" in the MAVLink Console (reverts after reboot)
+      b) Permanent:  open etc/extras.txt and uncomment the last line so it stops board_adc on
+                     every boot:
+                         board_adc stop
+    If you want to remove the analog battery source from the firmware entirely (so you never
+    rely on extras), that requires the "bake-into-firmware" route (edit rc.board_sensors and
+    recompile) — just ask if you need it.
+
+[7] Undo
+    Delete the etc folder on the SD card to fully restore the original state. Nothing in the
+    firmware is changed.

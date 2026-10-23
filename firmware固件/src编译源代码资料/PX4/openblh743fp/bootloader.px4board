@@ -1,0 +1,5 @@
+# Copyright (c) 2026 洋洋柚 (@zhangyangyangyou)
+# OpenblH743VIT6 — custom STM32H743VIT6 flight controller board.
+CONFIG_BOARD_TOOLCHAIN="arm-none-eabi"
+CONFIG_BOARD_ARCHITECTURE="cortex-m7"
+CONFIG_BOARD_ROMFSROOT=""

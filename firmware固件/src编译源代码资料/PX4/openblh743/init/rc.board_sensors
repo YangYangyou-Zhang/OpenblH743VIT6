@@ -1,0 +1,24 @@
+#!/bin/sh
+# Copyright (c) 2026 洋洋柚 (@zhangyangyangyou)
+# OpenblH743VIT6 — custom STM32H743VIT6 flight controller board.
+board_adc start
+# Both IMUs: ROLL_180 + YAW_270 (ROTATION_ROLL_180_YAW_270=14)
+mpu6500 start -s -b 2 -R 14
+mpu6500 start -s -b 3 -R 14
+# Barometers auto-scan both I2C buses
+bmp280 -I -a 0x76 start
+bmp280 -I -a 0x77 start
+bmp280 -X -a 0x76 start
+bmp280 -X -a 0x77 start
+spl06 -I -a 0x76 start
+spl06 -I -a 0x77 start
+spl06 -X -a 0x76 start
+spl06 -X -a 0x77 start
+# Compass: onboard QMC5883P on I2C1, driver rotation ROLL_180_YAW_90 (=10)
+# so that CAL_MAG0_ROT can stay at its default (-1).
+# Both I2C buses are declared "external", so -I never matches; use -X -b <bus>.
+qmc5883p -X -b 1 -R 10 start
+# Compass: external modules on the I2C2 expansion port
+qmc5883p -X -b 2 start
+qmc5883l -X start
+ist8310 -X start

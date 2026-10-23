@@ -1,0 +1,35 @@
+# Copyright (c) 2026 洋洋柚 (@zhangyangyangyou)
+# OpenblH743VIT6 — custom STM32H743VIT6 flight controller board.
+# Update the system and install required tools
+sudo apt-get update && sudo apt-get upgrade
+sudo apt-get install git make ruby cmake gcc-arm-none-eabi
+
+# Clone the iNav source code
+git clone https://github.com/iNavFlight/inav.git
+cd inav
+
+# Create the build directory and initialize CMake
+mkdir build && cd build
+cmake
+
+# Place the OpenblH743VIT6 folder under ~/inav/src/main/target/.
+
+# Build the firmware
+cd ~/inav
+# 1. Create the build directory
+mkdir -p build
+# 2. Run CMake configuration
+cmake -B build -DCMAKE_TOOLCHAIN_FILE=cmake/toolchain-arm-none-eabi.cmake
+# 3. Build your target (-j4 uses 4 CPU threads)
+cmake --build build --target OpenblH743VIT6 -j4
+
+# (Legacy F405 reference board: --target OpenblF405RGT6)
+
+# Locate the firmware
+# Generally under ~/inav/build
+
+# ===== Key notes (see OpenblH743VIT6/README.md for details) =====
+# - IMU orientation: CW90_DEG_FLIP
+# - SPI3 needs explicit AF (already configured in target.h), SPL06 address 0x77, QMC5883P address 0x2C
+# - SD card slowed down (SDCARD_SDIO_NORMAL_SPEED); if it still fails it's a hardware issue
+# - Dual IMU switching via gyro_to_use (0=first SPI2, 1=second SPI3)

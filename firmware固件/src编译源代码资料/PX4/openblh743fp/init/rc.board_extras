@@ -1,0 +1,9 @@
+#!/bin/sh
+# Copyright (c) 2026 洋洋柚 (@zhangyangyangyou)
+# OpenblH743VIT6 — custom STM32H743VIT6 flight controller board.
+
+# AT7456E OSD (SPI1: PA5/PA6/PA7, CS PC4)
+if ! param compare OSD_ATXXXX_CFG 0
+then
+	atxxxx start -s
+fi

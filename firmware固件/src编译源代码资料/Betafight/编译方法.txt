@@ -1,0 +1,37 @@
+# Copyright (c) 2026 洋洋柚 (@zhangyangyangyou)
+# OpenblH743VIT6 — custom STM32H743VIT6 flight controller board.
+# 更新软件包列表并升级系统
+sudo apt update && sudo apt upgrade
+
+# 安装基础编译工具
+# 你需要安装git（用于克隆代码）、make（用于构建）、clang（部分测试需要）和python等。
+sudo apt -y install build-essential git curl clang-18 python3 python-is-python3
+
+# 克隆Betaflight源代码
+git clone https://github.com/betaflight/betaflight.git
+
+# 进入源代码目录
+cd betaflight
+
+# 切换到稳定版本（例如4.5.3）
+git checkout 4.5.3
+
+# 这个命令会自动下载并安装所需的工具链
+make arm_sdk_install
+
+# 在首次编译或切换分支后，运行此命令来生成所有目标板的默认配置。
+make configs
+
+# 把OpenblH743VIT6文件夹放到~/betaflight/src/config/configs目录下，随后编译OpenblH743VIT6固件
+make config OpenblH743VIT6
+
+# 在~/betaflight/obj查找编译好的固件betaflight_4.5.3_STM32H743_OpenblH743VIT6.hex
+
+# （旧 F405 参考板：make config OpenblF405RGT6）
+
+# ===== 关键说明（详见 OpenblH743VIT6/README.md）=====
+# - HSE 晶振 8MHz：config.h 里 SYSTEM_HSE_MHZ 8
+# - IMU 方向：CW90_DEG_FLIP
+# - SD 卡 / 气压计 SPL06 / 磁力计 QMC5883P：暂不支持，config.h 里已注释
+#   USE_SDCARD / USE_BARO / USE_MAG，等后续版本支持后再取消注释
+# - 烧录后 CLI 执行 defaults + save 恢复出厂设置（否则 IMU 方向读到旧配置值）

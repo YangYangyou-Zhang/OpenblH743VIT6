@@ -1,0 +1,13 @@
+{
+    "board_id": 18848,
+    "magic": "PX4FWv1",
+    "description": "Firmware for the OpenblH743VIT6 board",
+    "image": "",
+    "build_time": 0,
+    "summary": "OpenblH743VIT6",
+    "version": "0.1",
+    "image_size": 0,
+    "image_maxsize": 1966080,
+    "git_identity": "",
+    "board_revision": 0
+}

@@ -1,0 +1,5 @@
+# OpenblH743 DPM238 参数默认值。
+# 注: 本板此 PX4 固件中 SENS_EN_INA226 / SENS_EN_INA238 无对应启动逻辑,
+#     此文件不生效, 仅为与官方包兼容保留, 可留可删。真正激活在 extras.txt。
+param set-default SENS_EN_INA226 0
+param set-default SENS_EN_INA238 1
