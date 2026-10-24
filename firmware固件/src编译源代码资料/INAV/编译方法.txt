@@ -3,33 +3,29 @@
 # 更新系统并安装必要工具
 sudo apt-get update && sudo apt-get upgrade
 sudo apt-get install git make ruby cmake gcc-arm-none-eabi
+# INAV 9.0.1 要求 arm-none-eabi-gcc 13.2.1（见 cmake/toolchain-arm-none-eabi.cmake）；
+# 构建需要 Ruby。系统 GCC 版本不一致时请装匹配的工具链。
 
 # 克隆 iNav 源代码
 git clone https://github.com/iNavFlight/inav.git
 cd inav
 
-# 创建构建目录并初始化 CMake
-mkdir build && cd build
-cmake
+# 把 OpenblH743VIT6 文件夹放到 src/main/target/ 下。
 
-# 把OpenblH743VIT6文件夹放到~/inav/src/main/target/下。
-
-# 编译固件
-cd ~/inav
-# 1. 创建构建目录
+# 创建构建目录并编译目标
 mkdir -p build
-# 2. 运行 CMake 配置
 cmake -B build -DCMAKE_TOOLCHAIN_FILE=cmake/toolchain-arm-none-eabi.cmake
-# 3. 编译你的目标（-j4 以4个cpu线程编译）
 cmake --build build --target OpenblH743VIT6 -j4
 
-# （旧 F405 参考板：--target OpenblF405RGT6）
-
-# 查看固件
-# 一般在~/inav/build目录下
+# 产物：build/inav_9.0.1_OpenblH743VIT6.hex
 
 # ===== 关键说明（详见 OpenblH743VIT6/README.md）=====
 # - IMU 方向：CW90_DEG_FLIP
-# - SPI3 需显式 AF（target.h 已配）、SPL06 地址 0x77、QMC5883P 地址 0x2C
+# - SPL06 0x77 / QMC5883P 0x2C，均在 I2C1（PB6/PB7）
 # - SD 卡已降速（SDCARD_SDIO_NORMAL_SPEED），若仍失败是硬件问题
 # - 双 IMU 用 gyro_to_use 切换（0=第一个 SPI2，1=第二个 SPI3）
+# - INAV target 不支持 CAN
+# - PB0/PB1 是 PWM11/12（VIT6）；fp 变体的 PB0 是蜂鸣器
+# - Flash 布局：0x08000000 向量 / 0x08020000 配置 / 0x08040000 固件；
+#   刷 INAV 会覆盖 APM bootloader，建议全片擦除，切回 PX4/APM 前重新烧 bootloader
+# - 接口图：PPT/annotated/ 和 PPT/interface_map_zh.md

@@ -3,33 +3,29 @@
 # Update the system and install required tools
 sudo apt-get update && sudo apt-get upgrade
 sudo apt-get install git make ruby cmake gcc-arm-none-eabi
+# INAV 9.0.1 expects arm-none-eabi-gcc 13.2.1 (see cmake/toolchain-arm-none-eabi.cmake);
+# Ruby is required by the build. Install a matching toolchain if the system one differs.
 
 # Clone the iNav source code
 git clone https://github.com/iNavFlight/inav.git
 cd inav
 
-# Create the build directory and initialize CMake
-mkdir build && cd build
-cmake
+# Place the OpenblH743VIT6 folder under src/main/target/.
 
-# Place the OpenblH743VIT6 folder under ~/inav/src/main/target/.
-
-# Build the firmware
-cd ~/inav
-# 1. Create the build directory
+# Create the build directory and build the target
 mkdir -p build
-# 2. Run CMake configuration
 cmake -B build -DCMAKE_TOOLCHAIN_FILE=cmake/toolchain-arm-none-eabi.cmake
-# 3. Build your target (-j4 uses 4 CPU threads)
 cmake --build build --target OpenblH743VIT6 -j4
 
-# (Legacy F405 reference board: --target OpenblF405RGT6)
+# Output: build/inav_9.0.1_OpenblH743VIT6.hex
 
-# Locate the firmware
-# Generally under ~/inav/build
-
-# ===== Key notes (see OpenblH743VIT6/README.md for details) =====
+# ===== Key notes (see OpenblH743VIT6/README_en.md for details) =====
 # - IMU orientation: CW90_DEG_FLIP
-# - SPI3 needs explicit AF (already configured in target.h), SPL06 address 0x77, QMC5883P address 0x2C
-# - SD card slowed down (SDCARD_SDIO_NORMAL_SPEED); if it still fails it's a hardware issue
+# - SPL06 0x77 / QMC5883P 0x2C, both on I2C1 (PB6/PB7)
+# - SD card slowed down (SDCARD_SDIO_NORMAL_SPEED); if it still fails it is a hardware issue
 # - Dual IMU switching via gyro_to_use (0=first SPI2, 1=second SPI3)
+# - No CAN support in the INAV target
+# - PB0/PB1 are PWM 11/12 (VIT6); the fp variant uses PB0 as a buzzer
+# - Flash layout: 0x08000000 vector / 0x08020000 config / 0x08040000 firmware;
+#   flashing INAV overwrites the APM bootloader — full chip erase, reflash the bootloader to return to PX4/APM
+# - Interface map: PPT/annotated/ and PPT/interface_map_en.md

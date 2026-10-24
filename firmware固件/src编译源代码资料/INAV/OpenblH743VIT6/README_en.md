@@ -9,12 +9,35 @@ INAV target for the custom STM32H743VIT6 (2MB Flash) flight controller. Pin assi
 | Gyro/Accel IMU0 | SPI2 | SCK=PB13, MISO=PB14, MOSI=PB15, CS=PB12 |
 | Gyro/Accel IMU1 | SPI3 | SCK=PB3, MISO=PB4, MOSI=PD6, CS=PD7 |
 | OSD (MAX7456) | SPI1 | SCK=PA5, MISO=PA6, MOSI=PA7, CS=PC4 |
-| Barometer BMP280 / SPL06 | I2C1 | SCL=PB6, SDA=PB7 |
-| Magnetometer QMC5883P | I2C1 | SCL=PB6, SDA=PB7 |
+| Barometer BMP280 / SPL06 | I2C1 | SCL=PB6, SDA=PB7 (SPL06 at 0x77) |
+| Magnetometer QMC5883P | I2C1 | SCL=PB6, SDA=PB7 (0x2C) |
 | SD card | SDMMC1 4-bit | Blackbox log |
 | 12 PWM outputs | — | See table below |
 
 IMU orientation: `CW90_DEG_FLIP` (calibrated on the actual board, corresponding to hwdef's `ROTATION_ROLL_180` + 90° yaw).
+
+Enabled features: OSD, VBAT, current meter, blackbox, ESC telemetry (`USE_ESC_SENSOR`) and the
+4-way BLHeli interface (`USE_SERIAL_4WAY_BLHELI_INTERFACE`).
+
+## Serial ports / interface map
+
+| Port | USART | Default use |
+|---|---|---|
+| UART1 | USART1 | GPS1 |
+| UART2 | USART2 | TEL1 |
+| UART3 | USART3 | GPS2 |
+| UART4 | UART4 | TEL2 |
+| UART6 | USART6 | receiver (`SERIALRX_UART = USART6`, CRSF default) |
+| UART7 | UART7 | URC / ESC telemetry |
+| UART8 | UART8 | TEL3 |
+
+No UART5 is exposed. The full interface map and pin tables are in
+[`PPT/interface_map_en.md`](../../../../PPT/interface_map_en.md); the annotated images are in `PPT/annotated/`.
+
+> Compass: the QMC5883P driver applies an internal axis transform (equivalent to CW270_DEG_FLIP)
+> to emulate a QMC5883L. Run the compass calibration after flashing and verify the heading; if it
+> is wrong, adjust `align_mag`.
+> Barometer: SPL06 is at 0x77; BMP280 auto-detection is also supported.
 
 ## PWM Output & DShot
 
@@ -53,6 +76,13 @@ Switch back to the first: `set gyro_to_use = 0` then `save`. To verify the switc
 
 SDMMC1 4-bit (PC8–PC12, PD2). The default high-speed mode (~30MHz) fails to initialize when the slot wiring is poor (status shows `SD card: Startup failed`); `SDCARD_SDIO_NORMAL_SPEED` has been enabled in target.h to slow down to ~15MHz. If it still fails, it is most likely a hardware issue such as slot contact/pull-up resistors.
 
+## Known limitations
+
+- **Only one IMU is used at a time** (`MAX_GYRO_COUNT=1`), selected with `gyro_to_use`.
+- **No CAN support** in this target.
+- **PB0/PB1 are PWM 11/12**, not a buzzer. This target is for the VIT6 board; on the fp variant PB0 is a buzzer.
+- **Flash layout / bootloader**: INAV's H743 linker uses `0x08000000` (vector), `0x08020000` (config) and `0x08040000` (firmware). Flashing INAV **overwrites the APM bootloader** used by PX4/ArduPilot; reflash the bootloader when switching back. Use a full chip erase.
+
 ## Build
 
 ```bash
@@ -77,6 +107,9 @@ cmake --build build --target OpenblH743VIT6 -j4
 
 # The firmware is generally under ~/inav/build/
 ```
+
+> INAV 9.0.1 expects `arm-none-eabi-gcc` **13.2.1** (see `cmake/toolchain-arm-none-eabi.cmake`);
+> **Ruby** is required for the build. Output: `inav_9.0.1_OpenblH743VIT6.hex`, usually under `build/`.
 
 ---
 
