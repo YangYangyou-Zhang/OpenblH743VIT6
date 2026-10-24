@@ -16,22 +16,24 @@ cd betaflight
 # 切换到稳定版本（例如4.5.3）
 git checkout 4.5.3
 
-# 这个命令会自动下载并安装所需的工具链
-make arm_sdk_install
+# 先应用本地 SPL06 气压计补丁（在 Betafight 目录下）
+cp -r <repo>/firmware固件/src编译源代码资料/Betafight/patches/drivers/barometer/* src/main/drivers/barometer/
+cp -r <repo>/firmware固件/src编译源代码资料/Betafight/patches/drivers/compass/*   src/main/drivers/compass/
+cp -r <repo>/firmware固件/src编译源代码资料/Betafight/patches/sensors/*           src/main/sensors/
+cp    <repo>/firmware固件/src编译源代码资料/Betafight/patches/cli/settings.c      src/main/cli/
 
-# 在首次编译或切换分支后，运行此命令来生成所有目标板的默认配置。
-make configs
+# 把 OpenblH743VIT6 文件夹放到 src/config/configs 目录下
+# 4.5.3 不要执行 make configs（会去 clone GitHub 的 betaflight/config 仓库）
 
-# 把OpenblH743VIT6文件夹放到~/betaflight/src/config/configs目录下，随后编译OpenblH743VIT6固件
-make config OpenblH743VIT6
+# 用已有的 GCC 10.x 工具链编译（官方 4.5.3 要求 10.3.1，覆盖版本检查）
+make OpenblH743VIT6 ARM_SDK_DIR=$HOME/gcc-arm-none-eabi-10-2020-q4-major GCC_REQUIRED_VERSION=10.2.1 -j32
 
-# 在~/betaflight/obj查找编译好的固件betaflight_4.5.3_STM32H743_OpenblH743VIT6.hex
+# 在 ~/betaflight/obj 查找固件 betaflight_4.5.3_STM32H743_OpenblH743VIT6.hex
 
-# （旧 F405 参考板：make config OpenblF405RGT6）
-
-# ===== 关键说明（详见 OpenblH743VIT6/README.md）=====
+# ===== 关键说明（详见 OpenblH743VIT6/README.md 和 patches/README.md）=====
 # - HSE 晶振 8MHz：config.h 里 SYSTEM_HSE_MHZ 8
 # - IMU 方向：CW90_DEG_FLIP
-# - SD 卡 / 气压计 SPL06 / 磁力计 QMC5883P：暂不支持，config.h 里已注释
-#   USE_SDCARD / USE_BARO / USE_MAG，等后续版本支持后再取消注释
-# - 烧录后 CLI 执行 defaults + save 恢复出厂设置（否则 IMU 方向读到旧配置值）
+# - SPL06 气压计：已通过本地补丁支持，config.h 已启用 USE_BARO / USE_BARO_SPL06
+# - QMC5883P 磁力计：已通过本地补丁支持，config.h 已启用 USE_MAG / USE_MAG_QMC5883P
+# - SD 卡：暂不支持，USE_SDCARD 仍保持注释
+# - 烧录后 CLI 执行 defaults + save（否则 IMU 方向读到旧配置值）

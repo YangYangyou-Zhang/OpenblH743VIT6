@@ -36,10 +36,12 @@
 #define USE_GYRO
 #define USE_ACC_SPI_MPU6500
 #define USE_GYRO_SPI_MPU6500
-// #define USE_BARO
+#define USE_BARO
 // #define USE_BARO_BMP280
-// #define USE_BARO_SPL06
-// #define USE_MAG
+#define USE_BARO_SPL06          // SPL06 on I2C1 (PB6/PB7), 0x77; needs the driver patch in ../patches
+#define USE_MAG
+#define USE_MAG_QMC5883P
+#define MAG_QMC5883P_ALIGN CW270_DEG_FLIP  // matches PX4 -R 10 (ROLL_180_YAW_90); verify by compass calibration
 // #define USE_MAG_QMC5883
 // #define QMC5883L_MAG_I2C_ADDRESS  0x2C
 #define USE_MAX7456

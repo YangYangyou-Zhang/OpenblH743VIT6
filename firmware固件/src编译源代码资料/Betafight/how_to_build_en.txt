@@ -16,21 +16,24 @@ cd betaflight
 # Check out a stable version (e.g. 4.5.3)
 git checkout 4.5.3
 
-# This command automatically downloads and installs the required toolchain
-make arm_sdk_install
+# Apply the local SPL06 barometer patch (from the Betafight folder)
+cp -r <repo>/firmware固件/src编译源代码资料/Betafight/patches/drivers/barometer/* src/main/drivers/barometer/
+cp -r <repo>/firmware固件/src编译源代码资料/Betafight/patches/drivers/compass/*   src/main/drivers/compass/
+cp -r <repo>/firmware固件/src编译源代码资料/Betafight/patches/sensors/*           src/main/sensors/
+cp    <repo>/firmware固件/src编译源代码资料/Betafight/patches/cli/settings.c      src/main/cli/
 
-# On first build or after switching branches, run this to generate default configs for all targets.
-make configs
+# Place the OpenblH743VIT6 folder under src/config/configs/
+# Do NOT run "make configs" with 4.5.3 (it clones GitHub's betaflight/config repo).
 
-# Place the OpenblH743VIT6 folder under ~/betaflight/src/config/configs, then build the OpenblH743VIT6 firmware
-make config OpenblH743VIT6
+# Build with an existing GCC 10.x toolchain (official 4.5.3 requires 10.3.1; override the check)
+make OpenblH743VIT6 ARM_SDK_DIR=$HOME/gcc-arm-none-eabi-10-2020-q4-major GCC_REQUIRED_VERSION=10.2.1 -j32
 
 # Find the built firmware betaflight_4.5.3_STM32H743_OpenblH743VIT6.hex under ~/betaflight/obj
 
-# (Legacy F405 reference board: make config OpenblF405RGT6)
-
-# ===== Key notes (see OpenblH743VIT6/README.md for details) =====
+# ===== Key notes (see OpenblH743VIT6/README.md and patches/README.md) =====
 # - HSE crystal 8MHz: SYSTEM_HSE_MHZ 8 in config.h
 # - IMU orientation: CW90_DEG_FLIP
-# - SD card / barometer SPL06 / magnetometer QMC5883P: not yet supported; USE_SDCARD / USE_BARO / USE_MAG are commented out in config.h. Uncomment them once supported in a future release.
-# - After flashing, run defaults + save in the CLI to restore factory settings (otherwise the IMU orientation reads the old config value)
+# - SPL06 barometer: supported via the local patch; USE_BARO / USE_BARO_SPL06 are enabled in config.h
+# - QMC5883P magnetometer: supported via the local patch; USE_MAG / USE_MAG_QMC5883P are enabled
+# - SD card: not yet supported; USE_SDCARD remains commented out
+# - After flashing, run defaults + save in the CLI once (otherwise the IMU orientation reads the old config value)
