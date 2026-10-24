@@ -1,13 +1,13 @@
-# OpenblH743VIT6 / MINI 接口映射说明
+﻿# OpenblH743VIT6 / MINI 接口映射说明
 
 对应固件：PX4 v1.17.0-alpha1、ArduPilot Copter/Plane 4.7.1、Betaflight 4.5.3、INAV 9.0.1。
 
-标注图（`PPT/接口标注/`）：
+标注图（`PPT/annotated/`）：
 
-- [H743VIT6 正面](接口标注/H743VIT6_top_标注.png)
-- [H743VIT6 背面](接口标注/H743VIT6_back_标注.png)
-- [H743MINI 正面](接口标注/H743MINI_top_标注.png)
-- [H743MINI 背面](接口标注/H743MINI_back_标注.png)
+- [H743VIT6 正面](annotated/H743VIT6_top_annotated.png)
+- [H743VIT6 背面](annotated/H743VIT6_back_annotated.png)
+- [H743MINI 正面](annotated/H743MINI_top_annotated.png)
+- [H743MINI 背面](annotated/H743MINI_back_annotated.png)
 
 ---
 
@@ -59,6 +59,8 @@ MINI 没有这个歧义：丝印直接标了 TX1/RX1 与 TX3/RX3。
 | 10 | 电源模块 | — | GND · VOE(电压) · CUR(电流) · 4V3 · 5V | — | ADC | — | — | |
 | 11 | USB | — | DP / DM / 5V / GND | — | OTG1 | SERIAL0 | — | |
 | 12 | PWM 输出 | — | PWM1-11（FP 变体 1-10） · 5V · GND | — | — | — | — | FP 变体 PB0 为蜂鸣器 |
+| 13 | SD 卡槽（顶部） | — | microSD · SDMMC1 | — | — | — | — | 日志 / 参数存储 |
+| 14 | CAM 接口（顶部） | 3pin | VID_IN · 5V · GND | — | — | — | — | 模拟相机 |
 
 ### 2.2 背面
 
@@ -67,8 +69,8 @@ MINI 没有这个歧义：丝印直接标了 TX1/RX1 与 TX3/RX3。
 | 1 | 无丝印，6pin | U10 `BX-SH1.0-6PWT` | 4V3 · GND · RX1 · TX1 · SDA2 · SCL2 | USART1 | **GPS1** | SERIAL1 | UART1 | 含 I2C2 罗盘 |
 | 2 | 大疆 HD 图传/数传（6pin，DJI HD VTX） | U15 `BX-SH1.0-6PWT` | RX6 · GND · RX2 · TX2 · GND · VCC | USART6 RX + USART2 | **RC + TELEM1** | SERIAL5 + SERIAL2 | UART6 + UART2 | 适配 DJI O3 Air Unit 等；VCC 供电 |
 | 3 | RC/数传（4pin） | U12 `BX-SH1.0-4PWT` | 4V3 · GND · RX6 · TX6 | USART6 | **RC** | SERIAL5 | UART6 | |
-| 4 | 模拟相机 | U16 `BX-SH1.0-3PWT` | VID_IN · GND · 5V | — | — | — | — | 模拟图传摄像头 |
-| 5 | USB | — | DP / DM / 5V / GND | — | OTG1 | SERIAL0 | — | |
+| 4 | USB | — | DP / DM / 5V / GND | — | OTG1 | SERIAL0 | — | |
+| 5 | BOOT 按钮（背面 SW1） | SW1 | BOOT0 | — | — | — | — | 按住上电进入 bootloader，用于 DFU/烧录 |
 
 > USART2 同时出现在正面的 TELEM1/VTX（U13）和背面的**大疆 HD 图传/数传口**（U15），两者是并联的，**不能同时接两个设备**。
 > USART6 同样被 TELEM/RC、SBUS、U12、U15 的 RX6 共用，实际使用时只接一个接收机/设备。
@@ -89,6 +91,8 @@ MINI 没有这个歧义：丝印直接标了 TX1/RX1 与 TX3/RX3。
 | 6 | 大疆 HD 图传/数传（6pin，DJI HD VTX） | U17 `BX-SH1.0-6PWT` | RX6 · GND · RX2 · TX2 · GND · VCC | USART6 RX + USART2 | **RC + TELEM1** | SERIAL5 + SERIAL2 | UART6 + UART2 | 适配 DJI O3 Air Unit 等；VCC 供电 |
 | 7 | I2C1（4pin） | U8 `BX-SH1.0-4PWT` | 4V3 · GND · SDA1 · SCL1 | — | I2C1 | — | — | 外接罗盘 |
 | 8 | 相机（3pin） | `BX-SH1.0-3PWT` | CAM / VID_IN · GND · 4V3 | — | — | — | — | 模拟相机 |
+| 9 | BOOT 按钮 | SW1 | BOOT0 | — | — | — | — | 按住上电进入 bootloader |
+| 10 | SD 卡槽 | — | microSD · SDMMC1 | — | — | — | — | 日志 / 参数存储 |
 
 ### 3.2 背面
 
@@ -142,3 +146,4 @@ ArduPilot：`SERIALn_PROTOCOL` / `SERIALn_BAUD`；BF/INAV：在 Ports 页把对�
 ---
 
 *标注图与本文档基于 2026-10-23 的固件配置和原理图（Rev 1.0）整理。*
+

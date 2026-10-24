@@ -1,13 +1,13 @@
-# OpenblH743VIT6 / MINI Interface Map
+﻿# OpenblH743VIT6 / MINI Interface Map
 
 Firmware: PX4 v1.17.0-alpha1, ArduPilot Copter/Plane 4.7.1, Betaflight 4.5.3, INAV 9.0.1.
 
-Annotated images (in `PPT/接口标注/`):
+Annotated images (in `PPT/annotated/`):
 
-- [H743VIT6 top](接口标注/H743VIT6_top_标注.png)
-- [H743VIT6 bottom](接口标注/H743VIT6_back_标注.png)
-- [H743MINI top](接口标注/H743MINI_top_标注.png)
-- [H743MINI bottom](接口标注/H743MINI_back_标注.png)
+- [H743VIT6 top](annotated/H743VIT6_top_annotated.png)
+- [H743VIT6 bottom](annotated/H743VIT6_back_annotated.png)
+- [H743MINI top](annotated/H743MINI_top_annotated.png)
+- [H743MINI bottom](annotated/H743MINI_back_annotated.png)
 
 ## 1. Serial ports
 
@@ -52,6 +52,8 @@ BF/INAV: UART number equals the STM32 USART number; the INAV target defaults `SE
 | 10 | Power module | — | GND, VOE, CUR, 4V3, 5V | — | ADC | — | — | |
 | 11 | USB | — | DP, DM, 5V, GND | — | OTG1 | SERIAL0 | — | |
 | 12 | PWM | — | PWM1-11 (FP: 1-10), 5V, GND | — | — | — | — | FP variant: PB0 = buzzer |
+| 13 | microSD slot (top) | — | microSD, SDMMC1 | — | — | — | — | Logs / parameters |
+| 14 | CAM port (top) | 3-pin | VID_IN, 5V, GND | — | — | — | — | Analog camera |
 
 ### 2.2 Bottom
 
@@ -60,8 +62,8 @@ BF/INAV: UART number equals the STM32 USART number; the INAV target defaults `SE
 | 1 | (none, 6-pin) | U10 | 4V3, GND, RX1, TX1, SDA2, SCL2 | USART1 | **GPS1** | SERIAL1 | UART1 | Compass I2C2 |
 | 2 | DJI HD VTX (6-pin) | U15 | RX6, GND, RX2, TX2, GND, VCC | USART6 RX + USART2 | **RC + TELEM1** | SERIAL5 + SERIAL2 | UART6 + UART2 | For DJI O3 Air Unit etc.; VCC power |
 | 3 | RC / telemetry (4-pin) | U12 | 4V3, GND, RX6, TX6 | USART6 | **RC** | SERIAL5 | UART6 | |
-| 4 | Analog camera | U16 | VID_IN, GND, 5V | — | — | — | — | |
-| 5 | USB | — | DP, DM, 5V, GND | — | OTG1 | SERIAL0 | — | |
+| 4 | USB | — | DP, DM, 5V, GND | — | OTG1 | SERIAL0 | — | |
+| 5 | BOOT button (rear SW1) | SW1 | BOOT0 | — | — | — | — | Hold while powering up for bootloader / DFU |
 
 USART2 and USART6 are paralleled across several physical connectors — connect only one device per USART.
 
@@ -79,6 +81,8 @@ USART2 and USART6 are paralleled across several physical connectors — connect 
 | 6 | DJI HD VTX (6-pin) | U17 | RX6, GND, RX2, TX2, GND, VCC | USART6 RX + USART2 | **RC + TELEM1** | SERIAL5 + SERIAL2 | UART6 + UART2 | For DJI O3 Air Unit etc.; VCC power |
 | 7 | I2C1 (4-pin) | U8 | 4V3, GND, SDA1, SCL1 | — | I2C1 | — | — |
 | 8 | Camera (3-pin) | — | CAM/VID_IN, GND, 4V3 | — | — | — | — |
+| 9 | BOOT button | SW1 | BOOT0 | — | — | — | — | Hold while powering up for bootloader |
+| 10 | microSD slot | — | microSD, SDMMC1 | — | — | — | — | Logs / parameters |
 
 ### 3.2 Bottom
 
@@ -107,3 +111,4 @@ The MINI has **no CAN** connector and only RX7 of UART7 (ESC telemetry input).
 | CAN | Front CN2 | — |
 
 *Based on the Rev 1.0 schematic and the 2026-10-23 firmware configuration.*
+

@@ -1,9 +1,20 @@
-# OpenblH743VIT6 — STM32H743 飞控
+﻿# OpenblH743VIT6 — STM32H743 飞控
 
 基于 **STM32H743VIT6** 的定制飞控（Board ID 18848），支持 PX4、ArduPilot、Betaflight 和 INAV。
 仓库包含硬件设计（原理图、PCB、BOM、Gerber）、结构模型、参数配置和预编译固件。
 
 [English](README.md)
+
+## 接口图
+
+| VIT6 正面 | VIT6 背面 |
+|---|---|
+| [![VIT6 正面](PPT/annotated/H743VIT6_top_preview.webp)](PPT/annotated/H743VIT6_top_annotated.png) | [![VIT6 背面](PPT/annotated/H743VIT6_back_preview.webp)](PPT/annotated/H743VIT6_back_annotated.png) |
+| **MINI 正面** | **MINI 背面** |
+| [![MINI 正面](PPT/annotated/H743MINI_top_preview.webp)](PPT/annotated/H743MINI_top_annotated.png) | [![MINI 背面](PPT/annotated/H743MINI_back_preview.webp)](PPT/annotated/H743MINI_back_annotated.png) |
+
+点击图片查看原图。接口与串口对应表：
+[interface_map_en.md](PPT/interface_map_en.md) · [接口说明](PPT/interface_map_zh.md)。
 
 ## 特性
 
@@ -47,6 +58,10 @@
 预编译固件在 [`firmware固件/built已编译固件/`](firmware固件/built已编译固件/)。
 PX4 的合并 hex 已包含 bootloader，用 ST-Link 烧录；`.px4` 可用 QGC 烧录。
 
+> **Bootloader 注意**：PX4 和 ArduPilot 共用 APM bootloader；Betaflight 和 INAV 的固件是从
+> `0x08000000` 直接链接的，**不会保留 APM bootloader**。切回 PX4/ArduPilot 前需要先重新烧回
+> bootloader。
+
 ## 仓库结构
 
 | 路径 | 说明 |
@@ -67,10 +82,12 @@ PX4 的合并 hex 已包含 bootloader，用 ST-Link 烧录；`.px4` 可用 QGC 
 | PX4 参数存 flash 变体 | [`readme.md`](firmware固件/src编译源代码资料/PX4/openblh743fp/readme.md) | [`readme_zh.md`](firmware固件/src编译源代码资料/PX4/openblh743fp/readme_zh.md) |
 | GPIO / 引脚参考 | [`gpio.md`](firmware固件/src编译源代码资料/PX4/openblh743/gpio.md) | [`gpio_zh.md`](firmware固件/src编译源代码资料/PX4/openblh743/gpio_zh.md) |
 | ArduPilot 移植 | [`readme.md`](firmware固件/src编译源代码资料/APM/readme.md) | [`readme_zh.md`](firmware固件/src编译源代码资料/APM/readme_zh.md) |
+| Betaflight target（VIT6） | [`README.md`](firmware固件/src编译源代码资料/Betafight/OpenblH743VIT6/README.md) | [`README_zh.md`](firmware固件/src编译源代码资料/Betafight/OpenblH743VIT6/README_zh.md) |
 | Betaflight 编译说明 | [`how_to_build_en.txt`](firmware固件/src编译源代码资料/Betafight/how_to_build_en.txt) | [`编译方法.txt`](firmware固件/src编译源代码资料/Betafight/编译方法.txt) |
+| INAV target（VIT6） | [`README_en.md`](firmware固件/src编译源代码资料/INAV/OpenblH743VIT6/README_en.md) | [`README.md`](firmware固件/src编译源代码资料/INAV/OpenblH743VIT6/README.md) |
 | INAV 编译说明 | [`how_to_build_en.txt`](firmware固件/src编译源代码资料/INAV/how_to_build_en.txt) | [`编译方法.txt`](firmware固件/src编译源代码资料/INAV/编译方法.txt) |
 | INA238 / DPM238 配置 | [`INSTRUCTIONS_EN.txt`](param参数/OpenblH743_DPM238_SD_px4/INSTRUCTIONS_EN.txt) | [`使用说明.txt`](param参数/OpenblH743_DPM238_SD_px4/使用说明.txt) |
-| 接口映射（VIT6 / MINI） | [`interface_map_en.md`](PPT/interface_map_en.md) | [`接口说明.md`](PPT/接口说明.md) |
+| 接口映射（VIT6 / MINI） | [`interface_map_en.md`](PPT/interface_map_en.md) | [`interface_map_zh.md`](PPT/interface_map_zh.md) |
 
 ## 从源码编译
 
@@ -131,3 +148,4 @@ bootloader 编译和产物说明见 ArduPilot 文档。
 - B站 / 抖音：洋洋柚Y
 
 联系方式与权威的许可/署名声明以 [`NOTICE.md`](NOTICE.md) 为准。
+

@@ -1,10 +1,21 @@
-# OpenblH743VIT6 — STM32H743 Flight Controller
+﻿# OpenblH743VIT6 — STM32H743 Flight Controller
 
 Custom **STM32H743VIT6** flight controller (Board ID 18848) supporting PX4, ArduPilot,
 Betaflight and INAV. The repository contains the hardware design (schematics, PCB,
 BOM, Gerber), mechanical models, parameter sets and prebuilt firmware.
 
 [中文说明](README_zh.md)
+
+## Interface map
+
+| VIT6 front | VIT6 rear |
+|---|---|
+| [![VIT6 front](PPT/annotated/H743VIT6_top_preview.webp)](PPT/annotated/H743VIT6_top_annotated.png) | [![VIT6 rear](PPT/annotated/H743VIT6_back_preview.webp)](PPT/annotated/H743VIT6_back_annotated.png) |
+| **MINI front** | **MINI rear** |
+| [![MINI front](PPT/annotated/H743MINI_top_preview.webp)](PPT/annotated/H743MINI_top_annotated.png) | [![MINI rear](PPT/annotated/H743MINI_back_preview.webp)](PPT/annotated/H743MINI_back_annotated.png) |
+
+Click an image for full resolution. Connector-to-UART tables:
+[interface_map_en.md](PPT/interface_map_en.md) · [接口说明](PPT/interface_map_zh.md).
 
 ## Highlights
 
@@ -51,6 +62,10 @@ Prebuilt firmware is in [`firmware固件/built已编译固件/`](firmware固件/
 PX4 merged hex files include the bootloader and are flashed with ST-Link; `.px4` files can be
 flashed from QGC.
 
+> **Bootloader note**: PX4 and ArduPilot use the shared APM bootloader. The Betaflight and INAV
+> targets are linked for direct flashing from `0x08000000` and **do not preserve the APM
+> bootloader** — reflash the bootloader when switching back to PX4/ArduPilot.
+
 ## Repository layout
 
 | Path | Description |
@@ -71,10 +86,12 @@ flashed from QGC.
 | PX4 flash-parameter variant | [`readme.md`](firmware固件/src编译源代码资料/PX4/openblh743fp/readme.md) | [`readme_zh.md`](firmware固件/src编译源代码资料/PX4/openblh743fp/readme_zh.md) |
 | GPIO / pin reference | [`gpio.md`](firmware固件/src编译源代码资料/PX4/openblh743/gpio.md) | [`gpio_zh.md`](firmware固件/src编译源代码资料/PX4/openblh743/gpio_zh.md) |
 | ArduPilot port | [`readme.md`](firmware固件/src编译源代码资料/APM/readme.md) | [`readme_zh.md`](firmware固件/src编译源代码资料/APM/readme_zh.md) |
+| Betaflight target (VIT6) | [`README.md`](firmware固件/src编译源代码资料/Betafight/OpenblH743VIT6/README.md) | [`README_zh.md`](firmware固件/src编译源代码资料/Betafight/OpenblH743VIT6/README_zh.md) |
 | Betaflight build notes | [`how_to_build_en.txt`](firmware固件/src编译源代码资料/Betafight/how_to_build_en.txt) | [`编译方法.txt`](firmware固件/src编译源代码资料/Betafight/编译方法.txt) |
+| INAV target (VIT6) | [`README_en.md`](firmware固件/src编译源代码资料/INAV/OpenblH743VIT6/README_en.md) | [`README.md`](firmware固件/src编译源代码资料/INAV/OpenblH743VIT6/README.md) |
 | INAV build notes | [`how_to_build_en.txt`](firmware固件/src编译源代码资料/INAV/how_to_build_en.txt) | [`编译方法.txt`](firmware固件/src编译源代码资料/INAV/编译方法.txt) |
 | INA238 / DPM238 setup | [`INSTRUCTIONS_EN.txt`](param参数/OpenblH743_DPM238_SD_px4/INSTRUCTIONS_EN.txt) | [`使用说明.txt`](param参数/OpenblH743_DPM238_SD_px4/使用说明.txt) |
-| Interface map (VIT6 / MINI) | [`interface_map_en.md`](PPT/interface_map_en.md) | [`接口说明.md`](PPT/接口说明.md) |
+| Interface map (VIT6 / MINI) | [`interface_map_en.md`](PPT/interface_map_en.md) | [`interface_map_zh.md`](PPT/interface_map_zh.md) |
 
 ## Building from source
 
@@ -141,3 +158,4 @@ This repository mixes original work and third-party material; see
 
 Contact details and the authoritative license/attribution statement are maintained in
 [`NOTICE.md`](NOTICE.md).
+
