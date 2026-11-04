@@ -107,6 +107,7 @@ For commercial licensing, please contact the author.
 - 作者 / Author：**洋洋柚**
 - Gitee：[@zhangyangyangyou](https://gitee.com/zhangyangyangyou)
 - GitHub：[@YangYangyou-Zhang](https://github.com/YangYangyou-Zhang)
+- 立创开源硬件平台 / OSHWHub：[OpenblH743VIT6](https://oshwhub.com/yangyangyou/project_nuqtfxty)
 - 邮箱 / Email：1703811632@qq.com
 - B站 / Bilibili：洋洋柚Y
 - 抖音 / Douyin：洋洋柚Y

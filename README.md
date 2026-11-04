@@ -4,6 +4,9 @@ Custom **STM32H743VIT6** flight controller (Board ID 18848) supporting PX4, Ardu
 Betaflight and INAV. The repository contains the hardware design (schematics, PCB,
 BOM, Gerber), mechanical models, parameter sets and prebuilt firmware.
 
+The hardware design is also published on **OSHWHub** (立创开源硬件平台):
+[OpenblH743VIT6 flight controller](https://oshwhub.com/yangyangyou/project_nuqtfxty).
+
 [中文说明](README_zh.md)
 
 ## Interface map
@@ -47,7 +50,11 @@ Click an image for full resolution. Connector-to-UART tables:
 | Safety switch | PB2 |
 
 Hardware design files cover the **VIT6** and **MINI** boards; the firmware board ports and
-prebuilt targets in this repository are named for the VIT6.
+prebuilt targets in this repository are named for the VIT6. The complete **LCEDA Pro**
+engineering project (VIT6 + MINI) is included as
+`Circuit_diagram电路图/ProPrj_OpenblH743飞控板星火计划_2026-11-04.epro2` and opens in
+立创EDA专业版. The hardware design is published on
+[OSHWHub](https://oshwhub.com/yangyangyou/project_nuqtfxty) with an online schematic/PCB viewer.
 
 ## Firmware
 
@@ -70,7 +77,7 @@ flashed from QGC.
 
 | Path | Description |
 |---|---|
-| [`Circuit_diagram电路图/`](Circuit_diagram电路图/) | Schematics (PDF), PCB Gerber, BOM, pick-and-place (VIT6 and MINI) |
+| [`Circuit_diagram电路图/`](Circuit_diagram电路图/) | Schematics (PDF), PCB Gerber, BOM, pick-and-place and the LCEDA Pro project (VIT6 and MINI) |
 | [`STL图纸/`](STL图纸/) | 3D mechanical models and solder-paste stencils |
 | [`firmware固件/built已编译固件/`](firmware固件/built已编译固件/) | Prebuilt PX4 / ArduPilot / Betaflight / INAV firmware |
 | [`firmware固件/src编译源代码资料/`](firmware固件/src编译源代码资料/) | PX4 board sources, ArduPilot hwdef, Betaflight/INAV configs, build notes |
@@ -154,6 +161,7 @@ This repository mixes original work and third-party material; see
 
 - Gitee: [@zhangyangyangyou](https://gitee.com/zhangyangyangyou)
 - GitHub: [@YangYangyou-Zhang](https://github.com/YangYangyou-Zhang)
+- OSHWHub: [OpenblH743VIT6](https://oshwhub.com/yangyangyou/project_nuqtfxty)
 - Bilibili / Douyin: 洋洋柚Y
 
 Contact details and the authoritative license/attribution statement are maintained in

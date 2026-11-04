@@ -3,6 +3,9 @@
 基于 **STM32H743VIT6** 的定制飞控（Board ID 18848），支持 PX4、ArduPilot、Betaflight 和 INAV。
 仓库包含硬件设计（原理图、PCB、BOM、Gerber）、结构模型、参数配置和预编译固件。
 
+硬件工程同时发布在 **立创开源硬件平台（OSHWHub）**：
+[OpenblH743VIT6 飞控板](https://oshwhub.com/yangyangyou/project_nuqtfxty)。
+
 [English](README.md)
 
 ## 接口图
@@ -45,6 +48,9 @@
 | 安全开关 | PB2 |
 
 硬件设计文件同时包含 **VIT6** 和 **MINI** 两块板；本仓库的固件板级移植与预编译目标以 VIT6 命名。
+完整的**立创EDA专业版**工程（VIT6 + MINI）为
+`Circuit_diagram电路图/ProPrj_OpenblH743飞控板星火计划_2026-11-04.epro2`，可直接用立创EDA专业版打开。
+硬件设计已在 [立创开源硬件平台](https://oshwhub.com/yangyangyou/project_nuqtfxty) 发布，可在线查看原理图和 PCB。
 
 ## 固件
 
@@ -66,7 +72,7 @@ PX4 的合并 hex 已包含 bootloader，用 ST-Link 烧录；`.px4` 可用 QGC 
 
 | 路径 | 说明 |
 |---|---|
-| [`Circuit_diagram电路图/`](Circuit_diagram电路图/) | 原理图（PDF）、PCB Gerber、BOM、坐标文件（VIT6 与 MINI） |
+| [`Circuit_diagram电路图/`](Circuit_diagram电路图/) | 原理图（PDF）、PCB Gerber、BOM、坐标文件、立创EDA专业版工程（VIT6 与 MINI） |
 | [`STL图纸/`](STL图纸/) | 结构件 3D 模型与钢网框 |
 | [`firmware固件/built已编译固件/`](firmware固件/built已编译固件/) | PX4 / ArduPilot / Betaflight / INAV 预编译固件 |
 | [`firmware固件/src编译源代码资料/`](firmware固件/src编译源代码资料/) | PX4 板级源码、ArduPilot hwdef、Betaflight/INAV 配置、编译说明 |
@@ -145,6 +151,7 @@ bootloader 编译和产物说明见 ArduPilot 文档。
 
 - Gitee：[@zhangyangyangyou](https://gitee.com/zhangyangyangyou)
 - GitHub：[@YangYangyou-Zhang](https://github.com/YangYangyou-Zhang)
+- 立创开源硬件平台：[OpenblH743VIT6](https://oshwhub.com/yangyangyou/project_nuqtfxty)
 - B站 / 抖音：洋洋柚Y
 
 联系方式与权威的许可/署名声明以 [`NOTICE.md`](NOTICE.md) 为准。
